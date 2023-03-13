@@ -19,5 +19,5 @@ clean:
 
 recompile: clean all
 
-run:
-	./algebra
+run: algebra
+	./$^
