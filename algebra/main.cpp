@@ -1,6 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <iostream>
+
+#include "mat.h"
 
 int **rc_product(int **a, int **b, int n, int m, int p)
 {
@@ -61,23 +61,9 @@ void free_matrix(int **a, int n)
 
 int main()
 {
-	srand(time(NULL));
-	int n = 1000; // rand() % 5 + 1;
-	int m = 1000; // rand() % 5 + 1;
-	int p = 1000; // rand() % 5 + 1;
-
-	int **A = init_matrix(n, m);
-	int **B = init_matrix(m, p);
-
-	// show_matrix(A, n, m);
-	// show_matrix(B, m, p);
-
-	int **C = rc_product(A, B, n, m, p);
-	// show_matrix(C, n, p);
-
-	free_matrix(A, n);
-	free_matrix(B, m);
-	free_matrix(C, n);
+	mat<int, 1000, 1000> a;
+	mat<int, 1000, 1000> b;
+	mat<int, 1000, 1000> c;
 
 	return 0;
 }
