@@ -1,29 +1,61 @@
 #ifndef MAT_H
 #define MAT_H
 
+#include <iostream>
+
+template <typename T, size_t rows, size_t cols>
 class mat
 {
 public:
-	mat(unsigned int rows, unsigned int cols);
+    // constructor
+    mat()
+    {
+    }
 
-	unsigned int get_rows() const;
-	unsigned int get_cols() const;
-	unsigned int get_size() const;
+    // get value in position (r, c)
+    T get(unsigned int r, unsigned int c) const
+    {
+        return matrix[r][c];
+    }
 
-	double get(unsigned int row, unsigned int col) const;
-	void set(unsigned int row, unsigned int col, double value);
+    // get number of rows
+    size_t get_rows() const
+    {
+        return rows;
+    }
 
-	mat rc_product(const mat &m) const;
+    // get number of columns
+    size_t get_cols() const
+    {
+        return cols;
+    }
 
-	void show() const;
+    // set value in position (r, c) to <value>
+    void set(unsigned int r, unsigned int c, T value)
+    {
+        matrix[r][c] = value;
+    }
 
-	~mat();
+    // display the matrix
+    void show() const
+    {
+        for (size_t i = 0; i < rows; i++)
+        {
+            for (size_t j = 0; j < cols; j++)
+            {
+                std::cout << matrix[i][j] << " " << std::flush;
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    // destructor
+    ~mat()
+    {
+    }
 
 private:
-	unsigned int rows;
-	unsigned int cols;
-	unsigned int size;
-	double **matrix;
+    T matrix[rows][cols];
 };
 
 #endif

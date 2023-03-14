@@ -4,23 +4,21 @@
 
 int main()
 {
-	mat a(2, 2);
-	mat b(2, 2);
+	mat<double, 3, 3> a;
+	mat<double, 3, 3> b;
 
-	for (int i = 0; i < 2; i++)
+	for (size_t i = 0; i < a.get_rows(); i++)
 	{
-		for (int j = 0; j < 2; j++)
+		for (size_t j = 0; j < a.get_cols(); j++)
 		{
-			a.set(i, j, i + j);
-			b.set(i, j, i * j);
+			a.set(i, j, i + j * 5);
+			b.set(i, j, a.get(i, j) / 10);
 		}
 	}
 
-	mat c = a.rc_product(b);
-
 	a.show();
+	std::cout << std::endl;
 	b.show();
-	c.show();
 
 	return 0;
 }
