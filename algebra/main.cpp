@@ -1,11 +1,11 @@
 #include <iostream>
 
-#include "mat.h"
+#include "mat2.h"
 
 int main()
 {
-	mat<double, 3, 3> a;
-	mat<double, 3, 3> b;
+	mat2<double, 3, 3> a;
+	mat2<double, 3, 3> b;
 
 	for (size_t i = 0; i < a.get_rows(); i++)
 	{

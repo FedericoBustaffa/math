@@ -10,7 +10,7 @@ all: $(TARGETS)
 algebra.x: $(OBJS)
 	$(CC) $^ -o $@
 
-main.o: main.cpp mat.h
+main.o: main.cpp mat2.h
 
 clean:
 	-rm *.o algebra.x
