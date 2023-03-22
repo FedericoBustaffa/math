@@ -8,10 +8,10 @@ class mat2
 {
 public:
     // constructor
-    mat2() { }
+    mat2() {}
 
     // get value in position (r, c)
-    T get(unsigned int r, unsigned int c) const { return matrix[r][c]; }
+    T get(size_t r, size_t c) const { return matrix[r][c]; }
 
     // get number of rows
     size_t get_rows() const { return rows; }
@@ -20,7 +20,7 @@ public:
     size_t get_cols() const { return cols; }
 
     // set value in position (r, c) to <value>
-    void set(unsigned int r, unsigned int c, T value) { matrix[r][c] = value; }
+    void set(size_t r, size_t c, T value) { matrix[r][c] = value; }
 
     // display the matrix
     void show() const
@@ -36,7 +36,7 @@ public:
     }
 
     // destructor
-    ~mat2() { }
+    ~mat2() {}
 
 private:
     T matrix[rows][cols];
