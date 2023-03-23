@@ -4,8 +4,8 @@
 
 int main()
 {
-	mat2<double, 3, 3> a;
-	mat2<double, 3, 3> b;
+	mat2 a(3, 3);
+	mat2 b(3, 3);
 
 	for (size_t i = 0; i < a.get_rows(); i++)
 	{
@@ -19,6 +19,8 @@ int main()
 	a.show();
 	std::cout << std::endl;
 	b.show();
+	std::cout << std::endl;
+	a.rc_product(b).show();
 
 	return 0;
 }
