@@ -1,7 +1,7 @@
 #ifndef MAT2_H
 #define MAT2_H
 
-#include <iostream>
+#include <cstdio>
 
 class mat2
 {
@@ -21,17 +21,32 @@ public:
     // set value in position (r, c) to <value>
     void set(size_t r, size_t c, double value);
 
+    // get the inverse if possible
+    // mat2 inv() const;
+
     // sum element by element
     mat2 sum(const mat2 &other) const;
 
     // sum element by element
     mat2 operator+(const mat2 &other) const;
 
-    // raws by columns product
+    // difference element by element
+    mat2 diff(const mat2 &other) const;
+
+    // difference element by element
+    mat2 operator-(const mat2 &other) const;
+
+    // rows by columns product
     mat2 rc_product(const mat2 &other) const;
 
-    // raws by columns product
+    // rows by columns product
     mat2 operator*(const mat2 &other) const;
+
+    // divides the matrix by the inverse of the other matrix
+    // mat2 div(const mat2 &other) const;
+
+    // divides the matrix by the inverse of the other matrix
+    // mat2 operator/(const mat2 &other) const;
 
     // display the matrix
     void show() const;

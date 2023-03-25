@@ -1,5 +1,7 @@
 #include "mat2.h"
 
+#include <iostream>
+
 // constructor
 mat2::mat2(size_t rows, size_t cols)
 	: rows(rows), cols(cols)
@@ -32,17 +34,36 @@ mat2 mat2::sum(const mat2 &other) const
 	for (size_t i = 0; i < rows; i++)
 	{
 		for (size_t j = 0; j < cols; j++)
-		{
-			s
-		}
+			s.set(i, j, matrix[i][j] + other.get(i, j));
 	}
+
+	return s;
 }
+
+// sum element by element
+mat2 mat2::operator+(const mat2 &other) const { return sum(other); }
+
+// difference element by element
+mat2 mat2::diff(const mat2 &other) const
+{
+	mat2 d(rows, cols);
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			d.set(i, j, matrix[i][j] - other.get(i, j));
+	}
+
+	return d;
+}
+
+// difference element by element
+mat2 mat2::operator-(const mat2 &other) const { return diff(other); }
 
 // raws by columns product
 mat2 mat2::rc_product(const mat2 &other) const
 {
 	size_t other_cols = other.get_cols();
-	mat2 r(other_cols, rows);
+	mat2 p(other_cols, rows);
 	double s = 0;
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -53,17 +74,14 @@ mat2 mat2::rc_product(const mat2 &other) const
 			{
 				s += matrix[i][k] * other.get(k, j);
 			}
-			r.set(i, j, s);
+			p.set(i, j, s);
 		}
 	}
 
-	return r;
+	return p;
 }
 
-mat2 mat2::operator*(const mat2 &other) const
-{
-	return rc_product(other);
-}
+mat2 mat2::operator*(const mat2 &other) const { return rc_product(other); }
 
 // display the matrix
 void mat2::show() const
@@ -76,6 +94,7 @@ void mat2::show() const
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 // destructor
