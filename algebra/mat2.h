@@ -24,6 +24,12 @@ public:
     // get the inverse if possible
     mat2 inv() const;
 
+    // sum a scalar element by element
+    mat2 scalar_sum(double value) const;
+
+    // sum a scalar element by element
+    mat2 operator+(double value) const;
+
     // sum element by element
     mat2 sum(const mat2 &other) const;
 
@@ -53,6 +59,18 @@ public:
 
     // destructor
     ~mat2();
+
+    // matrix of zeros rows x cols
+    static mat2 zeros(size_t rows, size_t cols);
+
+    // matrix of ones rows x cols
+    static mat2 ones(size_t rows, size_t cols);
+
+    // Identity matrix rows x cols
+    static mat2 identity(size_t size);
+
+    // matrix of random rows x cols
+    static mat2 rand(size_t rows, size_t cols);
 
 private:
     size_t rows, cols;

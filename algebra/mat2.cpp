@@ -1,6 +1,7 @@
 #include "mat2.h"
 
 #include <iostream>
+#include <random>
 
 // constructor
 mat2::mat2(size_t rows, size_t cols)
@@ -32,6 +33,21 @@ mat2 mat2::inv() const
 {
 	return *this;
 }
+
+// sum a scalar element by element
+mat2 mat2::scalar_sum(double value) const
+{
+	mat2 s(rows, cols);
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			s.set(i, j, matrix[i][j] + value);
+	}
+
+	return s;
+}
+
+mat2 mat2::operator+(double value) const { return scalar_sum(value); }
 
 // sum element by element
 mat2 mat2::sum(const mat2 &other) const
@@ -122,4 +138,44 @@ mat2::~mat2()
 		delete[] matrix[i];
 
 	delete[] matrix;
+}
+
+// static methods
+
+// matrix of zeros rows x cols
+mat2 mat2::zeros(size_t rows, size_t cols)
+{
+	return mat2(rows, cols);
+}
+
+// matrix of ones rows x cols
+mat2 mat2::ones(size_t rows, size_t cols)
+{
+	return mat2(rows, cols) + 1;
+}
+
+// Identity matrix rows x cols
+mat2 mat2::identity(size_t size)
+{
+	mat2 id(size, size);
+	for (size_t i = 0; i < size; i++)
+		id.set(i, i, 1);
+
+	return id;
+}
+
+// matrix of random rows x cols
+mat2 mat2::rand(size_t rows, size_t cols)
+{
+	mat2 r(rows, cols);
+	std::default_random_engine generator;
+	std::uniform_real_distribution<double> distribution(0, 1);
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			r.set(i, j, distribution(generator));
+	}
+
+	return r;
 }

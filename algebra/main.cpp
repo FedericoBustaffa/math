@@ -5,20 +5,8 @@
 
 int main()
 {
-	mat2 a(3, 3);
-	mat2 b(3, 3);
-
-	std::default_random_engine generator;
-	std::uniform_real_distribution<double> distribution(0, 9);
-
-	for (size_t i = 0; i < a.get_rows(); i++)
-	{
-		for (size_t j = 0; j < a.get_cols(); j++)
-		{
-			a.set(i, j, distribution(generator));
-			b.set(i, j, distribution(generator));
-		}
-	}
+	mat2 a = mat2::ones(3, 3);
+	mat2 b = mat2::identity(3);
 
 	std::cout << "matrix a" << std::endl;
 	a.show();
