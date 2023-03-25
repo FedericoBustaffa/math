@@ -22,7 +22,7 @@ public:
     void set(size_t r, size_t c, double value);
 
     // get the inverse if possible
-    // mat2 inv() const;
+    mat2 inv() const;
 
     // sum element by element
     mat2 sum(const mat2 &other) const;
@@ -43,10 +43,10 @@ public:
     mat2 operator*(const mat2 &other) const;
 
     // divides the matrix by the inverse of the other matrix
-    // mat2 div(const mat2 &other) const;
+    mat2 div(const mat2 &other) const;
 
     // divides the matrix by the inverse of the other matrix
-    // mat2 operator/(const mat2 &other) const;
+    mat2 operator/(const mat2 &other) const;
 
     // display the matrix
     void show() const;

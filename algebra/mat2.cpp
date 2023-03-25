@@ -27,6 +27,12 @@ size_t mat2::get_cols() const { return cols; }
 // set value in position (r, c) to <value>
 void mat2::set(size_t r, size_t c, double value) { matrix[r][c] = value; }
 
+// get the inverse if possible
+mat2 mat2::inv() const
+{
+	return *this;
+}
+
 // sum element by element
 mat2 mat2::sum(const mat2 &other) const
 {
@@ -82,6 +88,18 @@ mat2 mat2::rc_product(const mat2 &other) const
 }
 
 mat2 mat2::operator*(const mat2 &other) const { return rc_product(other); }
+
+// divides the matrix by the inverse of the other matrix
+mat2 mat2::div(const mat2 &other) const
+{
+	return *this * other.inv();
+}
+
+// divides the matrix by the inverse of the other matrix
+mat2 mat2::operator/(const mat2 &other) const
+{
+	return div(other);
+}
 
 // display the matrix
 void mat2::show() const
