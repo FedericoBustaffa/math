@@ -20,7 +20,7 @@ int main()
 	std::cout << std::endl;
 	b.show();
 	std::cout << std::endl;
-	a.rc_product(b).show();
+	(a * b).show();
 
 	return 0;
 }

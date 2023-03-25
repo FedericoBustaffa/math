@@ -7,72 +7,37 @@ class mat2
 {
 public:
     // constructor
-    mat2(size_t rows, size_t cols)
-        : rows(rows), cols(cols)
-    {
-        matrix = new double *[rows];
-        for (size_t i = 0; i < rows; i++)
-        {
-            matrix[i] = new double[cols];
-            for (size_t j = 0; j < cols; j++)
-                matrix[i][j] = 0;
-        }
-    }
+    mat2(size_t rows, size_t cols);
 
     // get value in position (r, c)
-    double get(size_t r, size_t c) const { return matrix[r][c]; }
+    double get(size_t r, size_t c) const;
 
     // get number of rows
-    size_t get_rows() const { return rows; }
+    size_t get_rows() const;
 
     // get number of columns
-    size_t get_cols() const { return cols; }
+    size_t get_cols() const;
 
     // set value in position (r, c) to <value>
-    void set(size_t r, size_t c, double value) { matrix[r][c] = value; }
+    void set(size_t r, size_t c, double value);
 
-    mat2 rc_product(const mat2 &m)
-    {
-        size_t m_cols = m.get_cols();
-        mat2 r(m_cols, rows);
-        double s = 0;
-        for (size_t i = 0; i < rows; i++)
-        {
-            for (size_t j = 0; j < cols; j++)
-            {
-                s = 0;
-                for (size_t k = 0; k < rows; k++)
-                {
-                    s += matrix[i][k] * m.get(k, j);
-                }
-                r.set(i, j, s);
-            }
-        }
+    // sum element by element
+    mat2 sum(const mat2 &other) const;
 
-        return r;
-    }
+    // sum element by element
+    mat2 operator+(const mat2 &other) const;
+
+    // raws by columns product
+    mat2 rc_product(const mat2 &other) const;
+
+    // raws by columns product
+    mat2 operator*(const mat2 &other) const;
 
     // display the matrix
-    void show() const
-    {
-        for (size_t i = 0; i < rows; i++)
-        {
-            for (size_t j = 0; j < cols; j++)
-            {
-                std::cout << matrix[i][j] << " " << std::flush;
-            }
-            std::cout << std::endl;
-        }
-    }
+    void show() const;
 
     // destructor
-    ~mat2()
-    {
-        for (size_t i = 0; i < cols; i++)
-            delete[] matrix[i];
-
-        delete[] matrix;
-    }
+    ~mat2();
 
 private:
     size_t rows, cols;
