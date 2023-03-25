@@ -1,12 +1,10 @@
 #include <iostream>
-#include <random>
 
-#include "mat2.h"
+#include "vec.h"
 
 int main()
 {
-	mat2 a = mat2::ones(3, 3);
-	mat2 b = mat2::identity(3);
+	vec a = vec::zeros(3);
 
 	std::cout << "matrix a" << std::endl;
 	a.show();

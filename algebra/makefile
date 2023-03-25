@@ -3,7 +3,7 @@ CC = g++
 CPPFLAGS = -Wall -std=c++17
 
 TARGETS = algebra.x
-OBJS = main.o mat2.o
+OBJS = main.o vec.o
 
 all: $(TARGETS)
 
@@ -11,7 +11,7 @@ algebra.x: $(OBJS)
 	$(CC) $^ -o $@
 
 main.o: main.cpp
-mat2.o: mat2.h mat2.cpp
+vec.o: vec.h vec.cpp
 
 clean:
 	-rm *.o algebra.x
