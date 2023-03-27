@@ -1,17 +1,14 @@
 #include <iostream>
 
-#include "mat.hpp"
+#include "vec.hpp"
 
 int main()
 {
-	mat a = mat::zeros(3, 4);
-	std::cout << a.get_size() << std::endl;
+	vec a = vec::rand(3);
 
-	mat b = a;
-	std::cout << b.get_size() << std::endl;
-
-	a.show();
-	b.show();
+	std::cout << a[1] << std::endl;
+	a[1] = 1;
+	std::cout << a[1] << std::endl;
 
 	return 0;
 }
