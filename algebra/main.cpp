@@ -1,34 +1,17 @@
 #include <iostream>
 
-#include "vec.h"
+#include "mat.hpp"
 
 int main()
 {
-	vec a = vec::zeros(3);
+	mat a = mat::zeros(3, 4);
+	std::cout << a.get_size() << std::endl;
 
-	std::cout << "matrix a" << std::endl;
+	mat b = a;
+	std::cout << b.get_size() << std::endl;
+
 	a.show();
-	std::cout << std::endl;
-
-	std::cout << "matrix b" << std::endl;
 	b.show();
-	std::cout << std::endl;
-
-	std::cout << "matrix a + b" << std::endl;
-	(a + b).show();
-	std::cout << std::endl;
-
-	std::cout << "matrix a - b" << std::endl;
-	(a - b).show();
-	std::cout << std::endl;
-
-	std::cout << "matrix a * b" << std::endl;
-	(a * b).show();
-	std::cout << std::endl;
-
-	std::cout << "matrix b * a" << std::endl;
-	(b * a).show();
-	std::cout << std::endl;
 
 	return 0;
 }
