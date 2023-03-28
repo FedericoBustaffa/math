@@ -7,13 +7,13 @@ class vec
 {
 public:
     // constructor
+    vec();
     vec(size_t length);
     vec(const vec &other);
 
     // get and set
     size_t get_length() const;
-
-    double get(size_t index) const;
+    double &get(size_t index) const;
     void set(size_t index, double value);
 
     // GET / SET OPERATOR
@@ -42,19 +42,19 @@ public:
     vec operator/(const vec &other) const;
 
     // STDOUT
-    friend std::ostream &operator<<(std::ostream &os, const vec &m);
+    friend std::ostream &operator<<(std::ostream &os, const vec &v);
 
     // destructor
     ~vec();
 
-    // base tensors
+    // base vectors
     static vec zeros(size_t length);
     static vec ones(size_t length);
     static vec rand(size_t length);
 
 private:
     size_t length;
-    double *tensor;
+    double *vector;
 };
 
 #endif

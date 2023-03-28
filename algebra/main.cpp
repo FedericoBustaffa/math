@@ -1,14 +1,12 @@
 #include <iostream>
 
 #include "vec.hpp"
+#include "mat.hpp"
 
 int main()
 {
-	vec a = vec::rand(3);
-
-	std::cout << a[1] << std::endl;
-	a[1] = 1;
-	std::cout << a[1] << std::endl;
+	mat m(5);
+	std::cout << m << std::endl;
 
 	return 0;
 }

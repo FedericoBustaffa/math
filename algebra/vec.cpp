@@ -3,36 +3,43 @@
 #include <random>
 
 // constructors
+vec::vec()
+	: length(0)
+{
+	vector = nullptr;
+}
+
 vec::vec(size_t length)
 	: length(length)
 {
-	tensor = new double[length];
+	vector = new double[length];
 	for (size_t i = 0; i < length; i++)
-		tensor[i] = 0;
+		vector[i] = 0;
 }
 
 vec::vec(const vec &other)
 	: length(other.get_length())
 {
-	tensor = new double[length];
+	vector = new double[length];
 	for (size_t i = 0; i < length; i++)
 	{
-		tensor[i] = other.get(i);
+		vector[i] = other.get(i);
 	}
 }
 
 size_t vec::get_length() const { return length; }
 
-double vec::get(size_t index) const { return tensor[index]; }
-void vec::set(size_t index, double value) { tensor[index] = value; }
+double &vec::get(size_t index) const { return vector[index]; }
 
-double &vec::operator[](size_t index) const { return tensor[index]; }
+void vec::set(size_t index, double value) { vector[index] = value; }
+
+double &vec::operator[](size_t index) const { return vector[index]; }
 
 vec vec::scalar_sum(double scalar) const
 {
 	vec s(length);
 	for (size_t i = 0; i < length; i++)
-		s.set(i, tensor[i] + scalar);
+		s.set(i, vector[i] + scalar);
 
 	return s;
 }
@@ -41,7 +48,7 @@ vec vec::scalar_diff(double scalar) const
 {
 	vec d(length);
 	for (size_t i = 0; i < length; i++)
-		d.set(i, tensor[i] - scalar);
+		d.set(i, vector[i] - scalar);
 
 	return d;
 }
@@ -50,7 +57,7 @@ vec vec::scalar_mul(double scalar) const
 {
 	vec p(length);
 	for (size_t i = 0; i < length; i++)
-		p.set(i, tensor[i] * scalar);
+		p.set(i, vector[i] * scalar);
 
 	return p;
 }
@@ -59,7 +66,7 @@ vec vec::scalar_div(double scalar) const
 {
 	vec dv(length);
 	for (size_t i = 0; i < length; i++)
-		dv.set(i, tensor[i] / scalar);
+		dv.set(i, vector[i] / scalar);
 
 	return dv;
 }
@@ -68,7 +75,7 @@ vec vec::sum(const vec &other) const
 {
 	vec s(length);
 	for (size_t i = 0; i < length; i++)
-		s.set(i, tensor[i] + other.get(i));
+		s.set(i, vector[i] + other.get(i));
 
 	return s;
 }
@@ -77,7 +84,7 @@ vec vec::diff(const vec &other) const
 {
 	vec d(length);
 	for (size_t i = 0; i < length; i++)
-		d.set(i, tensor[i] - other.get(i));
+		d.set(i, vector[i] - other.get(i));
 
 	return d;
 }
@@ -86,7 +93,7 @@ vec vec::mul(const vec &other) const
 {
 	vec m(length);
 	for (size_t i = 0; i < length; i++)
-		m.set(i, tensor[i] * other.get(i));
+		m.set(i, vector[i] * other.get(i));
 
 	return m;
 }
@@ -95,7 +102,7 @@ vec vec::div(const vec &other) const
 {
 	vec dv(length);
 	for (size_t i = 0; i < length; i++)
-		dv.set(i, tensor[i] - other.get(i));
+		dv.set(i, vector[i] / other.get(i));
 
 	return dv;
 }
@@ -118,9 +125,13 @@ std::ostream &operator<<(std::ostream &os, const vec &v)
 	return os;
 }
 
-vec::~vec() { delete[] tensor; }
+vec::~vec()
+{
+	std::cout << "vec destructor" << std::endl;
+	delete[] vector;
+}
 
-// Static methos for tensor generation
+// Static methos for vector generation
 vec vec::zeros(size_t length) { return vec(length); }
 
 vec vec::ones(size_t length) { return vec(length) + 1; }
