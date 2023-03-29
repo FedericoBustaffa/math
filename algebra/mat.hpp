@@ -1,6 +1,10 @@
 #ifndef MAT_H
 #define MAT_H
 
+#include <iostream>
+#include <random>
+#include <ctime>
+
 template <typename T>
 class mat
 {
@@ -137,6 +141,18 @@ public:
 		return m;
 	}
 
+	mat transpose() const
+	{
+		mat t(cols, rows);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				t(j, i) = matrix[i][j];
+		}
+
+		return t;
+	}
+
 	// stdout
 	friend std::ostream &operator<<(std::ostream &os, const mat &m)
 	{
@@ -153,6 +169,43 @@ public:
 
 		return os;
 	}
+
+	static mat zeros(size_t rows, size_t cols) { return mat(rows, cols); }
+	static mat zeros(size_t dim) { return mat(dim); }
+
+	static mat ones(size_t rows, size_t cols) { return mat(rows, cols) + 1; }
+	static mat ones(size_t dim) { return mat(dim) + 1; }
+
+	static mat identity(size_t dim)
+	{
+		mat id(dim);
+		for (size_t i = 0; i < dim; i++)
+			id(i, i) = 1;
+
+		return id;
+	}
+
+	static mat rand(size_t rows, size_t cols, T min, T max)
+	{
+		mat r(rows, cols);
+		std::default_random_engine engine;
+		engine.seed(time(nullptr));
+		std::uniform_real_distribution<T> distribution(min, max);
+
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				r(i, j) = distribution(engine);
+		}
+
+		return r;
+	}
+
+	static mat rand(size_t rows, size_t cols) { return rand(rows, cols, 0, 1); }
+
+	static mat rand(size_t dim, size_t min, size_t max) { return rand(dim, dim, min, max); }
+
+	static mat rand(size_t dim) { return rand(dim, dim, 0, 1); }
 
 	~mat()
 	{
