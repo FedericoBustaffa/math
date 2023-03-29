@@ -1,6 +1,6 @@
 
 CC = g++
-CPPFLAGS = -Wall -std=c++20
+CPPFLAGS = -Wall -std=c++17
 
 TARGETS = algebra.x
 OBJS = main.o

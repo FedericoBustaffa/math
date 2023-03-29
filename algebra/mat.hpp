@@ -37,6 +37,107 @@ public:
 
 	T &operator()(size_t i, size_t j) const { return matrix[i][j]; };
 
+	T &operator()(size_t i) const
+	{
+		if (cols == 1)
+			return matrix[i][0];
+		else
+			return matrix[0][i];
+	}
+
+	// operazioni scalari
+	mat operator+(T scalar) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] + scalar;
+		}
+
+		return m;
+	}
+
+	mat operator-(T scalar) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] - scalar;
+		}
+
+		return m;
+	}
+
+	mat operator*(T scalar) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] * scalar;
+		}
+
+		return m;
+	}
+
+	mat operator/(T scalar) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] / scalar;
+		}
+
+		return m;
+	}
+
+	// somma elemento per elemento
+	mat operator+(const mat &other) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] + other(i, j);
+		}
+
+		return m;
+	}
+
+	// differenza elemento per elemento
+	mat operator-(const mat &other) const
+	{
+		mat m(rows, cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				m(i, j) = matrix[i][j] - other(i, j);
+		}
+
+		return m;
+	}
+
+	// prodotto riga per colonna
+	mat operator*(const mat &other) const
+	{
+		size_t m_cols = other.get_cols();
+		mat m(rows, m_cols);
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < m_cols; j++)
+			{
+				for (size_t k = 0; k < cols; k++)
+					m(i, j) += matrix[i][k] * other(k, j);
+			}
+		}
+
+		return m;
+	}
+
+	// stdout
 	friend std::ostream &operator<<(std::ostream &os, const mat &m)
 	{
 		size_t rows = m.get_rows();
