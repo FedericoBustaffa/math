@@ -1,18 +1,16 @@
 
 CC = g++
-CPPFLAGS = -Wall -std=c++17
+CPPFLAGS = -Wall -std=c++20
 
 TARGETS = algebra.x
-OBJS = main.o vec.o mat.o
+OBJS = main.o
 
 all: $(TARGETS)
 
 algebra.x: $(OBJS)
 	$(CC) $^ -o $@
 
-main.o: main.cpp
-vec.o: vec.hpp vec.cpp
-mat.o: mat.hpp mat.cpp
+main.o: mat.hpp main.cpp
 
 clean:
 	-rm *.o algebra.x
@@ -21,3 +19,4 @@ recompile: clean all
 
 run: algebra.x
 	./$^
+

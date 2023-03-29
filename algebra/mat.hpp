@@ -1,46 +1,70 @@
 #ifndef MAT_H
 #define MAT_H
 
-#include "vec.hpp"
-
+template <typename T>
 class mat
 {
 public:
-	// constructors
-	mat();
-	mat(size_t rows, size_t cols);
-	mat(size_t dim);
-	mat(const mat &other);
+	mat(size_t rows, size_t cols) : rows(rows), cols(cols)
+	{
+		matrix = new T *[rows];
+		for (size_t i = 0; i < rows; i++)
+		{
+			matrix[i] = new T[cols];
+			for (size_t j = 0; j < cols; j++)
+				matrix[i][j] = 0;
+		}
+	}
 
-	// get and set
-	size_t get_rows() const;
-	size_t get_cols() const;
-	size_t get_size() const;
-	vec &get(size_t index) const;
-	void set(size_t index, const vec &v);
+	mat(size_t dim) : mat(dim, dim)
+	{
+	}
 
-	vec &operator[](size_t index) const;
+	mat(const mat<T> &other) : mat(other.get_rows(), other.get_cols())
+	{
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+				matrix[i][j] = other.matrix[i][j];
+		}
+	}
 
-	friend std::ostream &operator<<(std::ostream &os, const mat &m);
+	size_t get_rows() const { return rows; }
 
-	~mat();
+	size_t get_cols() const { return cols; }
 
-	// base matrices
-	static mat zeros(size_t rows, size_t cols);
-	static mat zeros(size_t dim);
+	size_t size() const { return rows * cols; }
 
-	// static mat ones(size_t rows, size_t cols);
-	// static mat ones(size_t dim);
+	T &operator()(size_t i, size_t j) const { return matrix[i][j]; };
 
-	static mat identity(size_t dim);
+	friend std::ostream &operator<<(std::ostream &os, const mat &m)
+	{
+		size_t rows = m.get_rows();
+		size_t cols = m.get_cols();
+		for (size_t i = 0; i < rows; i++)
+		{
+			for (size_t j = 0; j < cols; j++)
+			{
+				os << m(i, j) << " " << std::flush;
+			}
+			std::cout << std::endl;
+		}
 
-	static mat rand(size_t rows, size_t cols);
-	static mat rand(size_t dim);
+		return os;
+	}
+
+	~mat()
+	{
+		for (size_t i = 0; i < rows; i++)
+			delete[] matrix[i];
+
+		delete[] matrix;
+	}
 
 private:
 	size_t rows;
 	size_t cols;
-	vec *matrix;
+	T **matrix;
 };
 
 #endif
