@@ -1,3 +1,6 @@
+#ifndef MAT_UTILITY_H
+#define MAT_UTILITY_H
+
 #include "mat_core.hpp"
 
 template <typename T>
@@ -121,3 +124,5 @@ mat<T>::~mat()
 
 	delete[] matrix;
 }
+
+#endif

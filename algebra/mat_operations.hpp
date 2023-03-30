@@ -1,3 +1,6 @@
+#ifndef MAT_OPERATIONS_H
+#define MAT_OPERATIONS_H
+
 #include "mat_core.hpp"
 
 template <typename T>
@@ -110,3 +113,5 @@ mat<T> mat<T>::transpose() const
 
 	return t;
 }
+
+#endif
