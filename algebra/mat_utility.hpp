@@ -2,6 +2,7 @@
 #define MAT_UTILITY_H
 
 #include "mat_core.hpp"
+#include <cstddef>
 
 template <typename T>
 mat<T>::mat(size_t rows, size_t cols) : rows(rows), cols(cols)
@@ -40,15 +41,30 @@ template <typename T>
 size_t mat<T>::size() const { return rows * cols; }
 
 template <typename T>
-T &mat<T>::operator()(size_t i, size_t j) const { return matrix[i][j]; }
+std::pair<size_t, size_t> mat<T>::shape() const { return std::pair<size_t, size_t>(rows, cols); }
 
 template <typename T>
-T &mat<T>::operator()(size_t i) const
+T &mat<T>::operator()(size_t i, size_t j) { return matrix[i][j]; }
+
+template <typename T>
+T &mat<T>::operator()(size_t i)
 {
 	if (cols == 1)
 		return matrix[i][0];
 	else
 		return matrix[0][i];
+}
+
+template <typename T>
+const T& mat<T>::operator()(size_t i, size_t j) const { return matrix[i][j]; }
+
+template <typename T>
+const T& mat<T>::operator()(size_t i) const
+{
+    if(cols == 1)
+        return matrix[i][0];
+    else
+        return matrix[0][i];
 }
 
 template <typename T>
