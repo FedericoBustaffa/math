@@ -17,6 +17,22 @@ mat<T> mat<T>::operator+(T scalar) const
 }
 
 template <typename T>
+mat<T> operator+(T scalar, const mat<T> &m)
+{
+	size_t rows = m.get_rows();
+	size_t cols = m.get_cols();
+	mat<T> r(rows, cols);
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			r(i, j) = m(i, j) + scalar;
+	}
+
+	return r;
+}
+
+template <typename T>
 mat<T> mat<T>::operator-(T scalar) const
 {
 	mat m(rows, cols);
@@ -27,6 +43,22 @@ mat<T> mat<T>::operator-(T scalar) const
 	}
 
 	return m;
+}
+
+template <typename T>
+mat<T> operator-(T scalar, const mat<T> &m)
+{
+	size_t rows = m.get_rows();
+	size_t cols = m.get_cols();
+	mat<T> r(rows, cols);
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			r(i, j) = m(i, j) - scalar;
+	}
+
+	return r;
 }
 
 template <typename T>
@@ -43,6 +75,22 @@ mat<T> mat<T>::operator*(T scalar) const
 }
 
 template <typename T>
+mat<T> operator*(T scalar, const mat<T> &m)
+{
+	size_t rows = m.get_rows();
+	size_t cols = m.get_cols();
+	mat<T> r(rows, cols);
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			r(i, j) = m(i, j) * scalar;
+	}
+
+	return r;
+}
+
+template <typename T>
 mat<T> mat<T>::operator/(T scalar) const
 {
 	mat m(rows, cols);
@@ -53,6 +101,22 @@ mat<T> mat<T>::operator/(T scalar) const
 	}
 
 	return m;
+}
+
+template <typename T>
+mat<T> operator/(T scalar, const mat<T> &m)
+{
+	size_t rows = m.get_rows();
+	size_t cols = m.get_cols();
+	mat<T> r(rows, cols);
+
+	for (size_t i = 0; i < rows; i++)
+	{
+		for (size_t j = 0; j < cols; j++)
+			r(i, j) = m(i, j) / scalar;
+	}
+
+	return r;
 }
 
 // somma elemento per elemento

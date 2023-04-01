@@ -4,12 +4,18 @@
 
 int main()
 {
-	mat<double> a = mat<double>::ones(4) + 2;
-	mat<double> i = mat<double>::identity(4);
+	mat<double> a = mat<double>::identity(3);
+	mat<double> b(4, 8);
 
-	std::cout << a * i << std::endl;
-    auto shape = a.shape();
-    std::cout << "a shape: (" << shape.first << ", " << shape.second << ")" << std::endl;
+	try
+	{
+		std::cout << a.det() << std::endl;
+		std::cout << b.det() << std::endl;
+	}
+	catch (std::string e)
+	{
+		std::cout << e << std::endl;
+	}
 
 	return 0;
 }

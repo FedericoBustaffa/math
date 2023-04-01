@@ -56,15 +56,15 @@ T &mat<T>::operator()(size_t i)
 }
 
 template <typename T>
-const T& mat<T>::operator()(size_t i, size_t j) const { return matrix[i][j]; }
+const T &mat<T>::operator()(size_t i, size_t j) const { return matrix[i][j]; }
 
 template <typename T>
-const T& mat<T>::operator()(size_t i) const
+const T &mat<T>::operator()(size_t i) const
 {
-    if(cols == 1)
-        return matrix[i][0];
-    else
-        return matrix[0][i];
+	if (cols == 1)
+		return matrix[i][0];
+	else
+		return matrix[0][i];
 }
 
 template <typename T>
@@ -76,11 +76,18 @@ std::ostream &operator<<(std::ostream &os, const mat<T> &m)
 	{
 		for (size_t j = 0; j < cols; j++)
 		{
-			os << m(i, j) << " " << std::flush;
+			os.width(10);
+			os << std::left << m(i, j) << " " << std::flush;
 		}
 		std::cout << std::endl;
 	}
 
+	return os;
+}
+
+std::ostream &operator<<(std::ostream &os, const std::pair<size_t, size_t> &shape)
+{
+	os << "(" << shape.first << ", " << shape.second << ")";
 	return os;
 }
 
