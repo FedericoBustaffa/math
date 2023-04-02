@@ -20,3 +20,5 @@ recompile: clean all
 run: algebra.x
 	./$^
 
+valrun: algebra.x
+	valgrind -s --track-origins=yes ./algebra.x
